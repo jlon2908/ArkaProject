@@ -1,1 +1,1 @@
-#Proyecto Ara
+Proyecto Ara
