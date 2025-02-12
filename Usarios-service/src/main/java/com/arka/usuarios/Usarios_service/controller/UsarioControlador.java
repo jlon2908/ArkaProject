@@ -19,16 +19,6 @@ public class UsarioControlador {
         return usuarioServicio.obtenerTodosLosUsuarios();
     }
 
-    @GetMapping("/{id}")
-    public Usuario obtenerUsuarioPorId(@PathVariable Long id){
-        return usuarioServicio.obtenerUsuarioPorId(id);
-    }
-
-    @PostMapping
-    public  Usuario crearUsuario(@RequestBody Usuario usuario){
-        return  usuarioServicio.crearUsuario(usuario);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable Long id){
         if (usuarioServicio.obtenerUsuarioPorId(id) != null ){
@@ -37,6 +27,16 @@ public class UsarioControlador {
         }else {
             return ResponseEntity.status(404).body("No se encontro el usuario con id : " + id);
         }
+    }
+
+    @GetMapping("/{id}")
+    public Usuario obtenerUsuarioPorId(@PathVariable Long id){
+        return usuarioServicio.obtenerUsuarioPorId(id);
+    }
+    @PostMapping
+    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
+        Usuario nuevoUsuario = usuarioServicio.crearUsuario(usuario);
+        return ResponseEntity.ok(nuevoUsuario);  // ✅ Devuelve el usuario en el cuerpo de la respuesta
     }
 
     @GetMapping("/buscar")
